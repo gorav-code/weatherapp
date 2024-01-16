@@ -8,24 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isNight = false
+    
     var body: some View {
         ZStack(content: {
-            LinearGradient(gradient: Gradient(colors: [.blue, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            //lightBlue is color from our assets
+            BackgroundView(isNight: $isNight)
             
             VStack(content: {
-                Text("Jaipur")
-                    .font(.system(size: 32, weight: .medium, design: .default))
-                    .foregroundStyle(.white)
-                    .padding()
-                Image(systemName: "cloud.sun.fill")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 180, height: 180)
-                Text("70")
-                    .font(.system(size: 70, weight: .medium))
-                    .foregroundStyle(.white)
+                CityTextView(cityName: "Cupertino, CA")
+                MainWeatherSatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
+                                     temperature: 70)
                 
                 Spacer()
                 
@@ -55,15 +49,12 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    print("tapped")
+                    print("button tapped")
+                    isNight = !isNight
                 } label: {
-                    HStack{
-                        WeatherDayView(dayOfWeek: "SAT",
-                                       imageName: "snow",
-                                       temperature: 10)
-                        Text("change day time")
-                    }
-                    
+                    WeatherButton(title: "Change Day Time",
+                                  textColor: .blue,
+                                  backgroundColor: .white)
                 }
                 
                 Spacer()
@@ -76,24 +67,4 @@ struct ContentView: View {
     ContentView()
 }
 
-struct WeatherDayView: View{
-    var dayOfWeek: String
-    var imageName: String
-    var temperature: Int
-    
-    var body: some View{
-        VStack(content: {
-            Text(dayOfWeek)
-                .font(.system(size: 20, weight: .medium, design: .default))
-                .foregroundStyle(.white)
-            Image(systemName: imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
-            Text(String(temperature))
-                .font(.system(size: 26, weight: .medium))
-                .foregroundStyle(.white)
-        })
-    }
-}
+
