@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         ZStack(content: {
             //lightBlue is color from our assets
-            BackgroundView(isNight: $isNight)
+            BackgroundView(isNight: isNight)
             
             VStack(content: {
                 CityTextView(cityName: "Cupertino, CA")
