@@ -30,51 +30,42 @@ struct ContentView: View {
                 Spacer()
                 
                 //middle section
-                HStack(content: {
-                    Spacer()
-                    VStack(content: {
-                        Text("TUE")
-                            .font(.system(size: 20, weight: .medium, design: .default))
-                            .foregroundStyle(.white)
-                        Image(systemName: "cloud.sun.fill")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 60, height: 60)
-                        Text("74")
-                            .font(.system(size: 26, weight: .medium))
-                            .foregroundStyle(.white)
-                    })
-                    Spacer()
-                    VStack(content: {
-                        Text("TUE")
-                            .font(.system(size: 20, weight: .medium, design: .default))
-                            .foregroundStyle(.white)
-                        Image(systemName: "sun.max.fill")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 60, height: 60)
-                        Text("70")
-                            .font(.system(size: 26, weight: .medium))
-                            .foregroundStyle(.white)
-                    })
-                    Spacer()
-                    VStack(content: {
-                        Text("TUE")
-                            .font(.system(size: 20, weight: .medium, design: .default))
-                            .foregroundStyle(.white)
-                        Image(systemName: "wind")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 60, height: 60)
-                        Text("60")
-                            .font(.system(size: 26, weight: .medium))
-                            .foregroundStyle(.white)
-                    })
-                    Spacer()
-                })
+                HStack(spacing: 20){
+                    WeatherDayView(dayOfWeek: "TUE",
+                                   imageName: "cloud.sun.fill",
+                                   temperature: 20)
+                    
+                    WeatherDayView(dayOfWeek: "WED", 
+                                   imageName: "sun.max.fill",
+                                   temperature: 25)
+                    
+                    WeatherDayView(dayOfWeek: "THU", 
+                                   imageName: "wind.snow",
+                                   temperature: 4)
+                    
+                    WeatherDayView(dayOfWeek: "FRI",
+                                   imageName: "sunset.fill",
+                                   temperature: 19)
+                    
+                    WeatherDayView(dayOfWeek: "SAT",
+                                   imageName: "snow",
+                                   temperature: 10)
+                }
+                
+                Spacer()
+                
+                Button {
+                    print("tapped")
+                } label: {
+                    HStack{
+                        WeatherDayView(dayOfWeek: "SAT",
+                                       imageName: "snow",
+                                       temperature: 10)
+                        Text("change day time")
+                    }
+                    
+                }
+                
                 Spacer()
             })
         })
@@ -83,4 +74,26 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct WeatherDayView: View{
+    var dayOfWeek: String
+    var imageName: String
+    var temperature: Int
+    
+    var body: some View{
+        VStack(content: {
+            Text(dayOfWeek)
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .foregroundStyle(.white)
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 50)
+            Text(String(temperature))
+                .font(.system(size: 26, weight: .medium))
+                .foregroundStyle(.white)
+        })
+    }
 }
