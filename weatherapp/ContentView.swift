@@ -12,11 +12,11 @@ struct ContentView: View {
     @State private var isNight = false
     
     var body: some View {
-        ZStack(content: {
+        ZStack{
             //lightBlue is color from our assets
             BackgroundView(isNight: isNight)
             
-            VStack(content: {
+            VStack{
                 CityTextView(cityName: "Cupertino, CA")
                 MainWeatherSatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
                                      temperature: 70)
@@ -55,11 +55,14 @@ struct ContentView: View {
                     WeatherButton(title: "Change Day Time",
                                   textColor: .blue,
                                   backgroundColor: .white)
+                    .onAppear{
+                        print("btn Appeared")
+                    }
                 }
                 
                 Spacer()
-            })
-        })
+            }
+        }
     }
 }
 
